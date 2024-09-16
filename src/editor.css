@@ -1,0 +1,17 @@
+.es--editor-container {
+  width: 80%;
+}
+
+.es--editor-container .toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.es--editor-container .editor-content {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 200px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
