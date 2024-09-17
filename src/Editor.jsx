@@ -6,6 +6,8 @@ function Editor() {
   const editorRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  console.log(content);
+
   // set input
   const handleSetInputInState = () => {
     setContent(editorRef.current.innerHTML);

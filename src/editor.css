@@ -22,6 +22,9 @@
 .es--editor-container .toolbar button {
   width: 30px;
   height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: medium;
   border-radius: 5px;
   border: 1px solid #ccc;

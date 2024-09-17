@@ -80,20 +80,27 @@ function EditorMarkup({
         </div>
         {/* image upload and remove*/}
         <div>
-          {/* <label htmlFor="photo">🖼️</label> */}
-          <input
-            // style={{ display: "none" }}
-            type="file"
-            id="photo"
-            onChange={handleImageUpload}
-            aria-label="Upload Image"
-          />
+          <button>
+            <label
+              htmlFor="photo"
+              style={{ fontSize: "26px", marginTop: "-3px", cursor: "pointer" }}
+            >
+              🖼️
+            </label>
+            <input
+              style={{ display: "none" }}
+              type="file"
+              id="photo"
+              onChange={handleImageUpload}
+              aria-label="Upload Image"
+            />
+          </button>
           <button
             onClick={handleRemoveImage}
             disabled={!selectedImage}
             aria-label="Remove Image"
           >
-            Remove Image
+            ❌
           </button>
         </div>
       </div>
