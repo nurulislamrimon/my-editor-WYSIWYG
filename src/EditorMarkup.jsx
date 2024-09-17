@@ -9,30 +9,33 @@ function EditorMarkup({
   handleImageClick,
   handleRemoveImage,
   selectedImage,
+  handleKeyDown,
 }) {
   return (
     <div className="es--editor-container">
-      {/* Toolbar with formatting, alignment, and image upload */}
       <div className="toolbar">
+        {/* bold italic and underline */}
         <div>
           <button onClick={handleToolbarClick} value="bold" aria-label="Bold">
-            Bold
+            B
           </button>
           <button
             onClick={handleToolbarClick}
             value="italic"
             aria-label="Italic"
           >
-            Italic
+            I
           </button>
           <button
             onClick={handleToolbarClick}
             value="underline"
             aria-label="Underline"
           >
-            Underline
+            U
           </button>
         </div>
+
+        {/* alignment */}
         <div>
           <button
             onClick={handleToolbarClick}
@@ -55,9 +58,33 @@ function EditorMarkup({
             className="align align-right"
           ></button>
         </div>
+        {/* tags */}
         <div>
+          <button
+            onClick={handleToolbarClick}
+            value="h1"
+            aria-label="Heading 1"
+          >
+            H1
+          </button>
+          <button
+            onClick={handleToolbarClick}
+            value="h2"
+            aria-label="Heading 2"
+          >
+            H2
+          </button>
+          <button onClick={handleToolbarClick} value="p" aria-label="Paragraph">
+            P
+          </button>
+        </div>
+        {/* image upload and remove*/}
+        <div>
+          {/* <label htmlFor="photo">🖼️</label> */}
           <input
+            // style={{ display: "none" }}
             type="file"
+            id="photo"
             onChange={handleImageUpload}
             aria-label="Upload Image"
           />
@@ -76,6 +103,7 @@ function EditorMarkup({
         ref={editorRef}
         onInput={handleSetInputInState}
         onClick={handleImageClick}
+        onKeyDown={handleKeyDown}
         contentEditable
         className="editor-content"
       />

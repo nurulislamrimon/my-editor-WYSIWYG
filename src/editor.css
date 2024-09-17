@@ -1,11 +1,11 @@
 .es--editor-container {
-  width: 80%;
+  width: 100%;
 }
 
+/* toolbar */
 .es--editor-container .toolbar {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #ccc;
   height: 50px;
@@ -17,10 +17,27 @@
   align-items: center;
   gap: 8px;
 }
+
+/* toolbar button */
 .es--editor-container .toolbar button {
+  width: 30px;
+  height: 30px;
+  font-size: medium;
+  border-radius: 5px;
+  border: 1px solid #ccc;
   cursor: pointer;
 }
+.es--editor-container .toolbar button[value|="bold"] {
+  font-weight: bold;
+}
+.es--editor-container .toolbar button[value|="italic"] {
+  font-style: italic;
+}
+.es--editor-container .toolbar button[value|="underline"] {
+  text-decoration: underline;
+}
 
+/* content */
 .es--editor-container .editor-content {
   border: 1px solid #ccc;
   font-size: large;
@@ -30,45 +47,46 @@
   max-height: calc(100vh - 100px);
   overflow-y: auto;
 }
+.es--editor-container .editor-content img {
+  cursor: pointer;
+}
 
 /* --------------------------- */
 /* align icon */
 /* --------------------------- */
 
-.align {
-  width: 30px;
-  height: 30px;
+.es--editor-container .toolbar .align {
   position: relative;
 }
 
-.align::before {
+.es--editor-container .toolbar .align::before {
   content: "";
   position: absolute;
-  height: 2px;
-  width: 80%;
-  left: 10%;
-  top: 7px;
+  height: 1.2px;
+  width: 70%;
+  left: 15%;
+  top: 10px;
   background-color: black;
 }
 
-.align::after {
+.es--editor-container .toolbar .align::after {
   content: "";
   position: absolute;
-  height: 2px;
+  height: 1.2px;
   width: 50%;
-  bottom: 7px;
+  bottom: 10px;
   background-color: black;
 }
 
-.align-left::after {
-  left: 10%;
+.es--editor-container .toolbar .align-left::after {
+  left: 15%;
 }
 
-.align-center::after {
+.es--editor-container .toolbar .align-center::after {
   left: 25%;
 }
-.align-right::after {
-  right: 10%;
+.es--editor-container .toolbar .align-right::after {
+  right: 15%;
 }
 
 /* --------------------------- */

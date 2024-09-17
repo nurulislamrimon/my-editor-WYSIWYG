@@ -10,6 +10,7 @@ function Editor() {
   const handleSetInputInState = () => {
     setContent(editorRef.current.innerHTML);
   };
+
   // handle focus editor
   const focusEditor = () => {
     editorRef.current.focus();
@@ -17,11 +18,19 @@ function Editor() {
 
   // handle toolbar clicked
   const handleToolbarClick = (event) => {
-    if (event.target.tagName === "BUTTON") {
+    const command = event.target.value;
+    if (command === "h1" || command === "h2" || command === "p") {
+      document.execCommand(
+        "formatBlock",
+        false,
+        command === "p" ? "p" : `<${command}>`
+      );
+    } else if (event.target.tagName === "BUTTON") {
       document.execCommand(event.target.value.toLowerCase());
       focusEditor();
     }
   };
+
   // handle insert image in markup
   const insertImageInMarkup = (imageUrl) => {
     const editor = editorRef.current;
@@ -54,6 +63,7 @@ function Editor() {
     // Update content state
     handleSetInputInState();
   };
+
   // handle upload image in the server and insert
   const handleImageUpload = async (event) => {
     focusEditor();
@@ -63,6 +73,7 @@ function Editor() {
     const imageURL = URL.createObjectURL(file);
     insertImageInMarkup(imageURL);
   };
+
   // handle clicked image to remove
   const handleImageClick = (event) => {
     if (event.target.tagName === "IMG") {
@@ -71,12 +82,27 @@ function Editor() {
       setSelectedImage(null);
     }
   };
+
   // handle remove image
   const handleRemoveImage = () => {
     if (selectedImage) {
       selectedImage.remove();
       setSelectedImage(null);
       handleSetInputInState();
+    }
+  };
+
+  // handle key down to prevent image remove when pressing backspace
+  const handleKeyDown = (event) => {
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+    if (event.key === "Backspace" && range) {
+      if (range.collapsed) {
+        const nodeBefore = range.startContainer.previousSibling;
+        if (nodeBefore && nodeBefore.tagName === "IMG") {
+          event.preventDefault();
+        }
+      }
     }
   };
 
@@ -89,6 +115,7 @@ function Editor() {
       handleImageClick={handleImageClick}
       handleRemoveImage={handleRemoveImage}
       selectedImage={selectedImage}
+      handleKeyDown={handleKeyDown}
     />
   );
 }
