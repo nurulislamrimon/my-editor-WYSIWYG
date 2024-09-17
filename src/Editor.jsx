@@ -1,18 +1,30 @@
 import { useState, useRef, useEffect } from "react";
-import EditorMarkup from "./EditorMarkup";
+import EditorUI from "./EditorUI";
+import { usePhotoUpload } from "./usePhotoUpload";
 
 function Editor() {
-  const [content, setContent] = useState("");
   const editorRef = useRef(null);
+  const [content, setContent] = useState("");
+  const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-
-  console.log(content);
+  const { uploadPhotosAndUpdateContent, isUploading, uploadError } =
+    usePhotoUpload();
 
   // prevent user from leaving page without saving
   useEffect(() => {
     window.addEventListener("beforeunload", function (event) {
       event.preventDefault();
       event.returnValue = "Are you sure you want to leave?";
+    });
+    // after clicking the leave button / final close
+    window.addEventListener("unload", function () {
+      // deleteUploadedFiles();
+      // Use navigator.sendBeacon to send the request when the page is closed
+      const url = "http://localhost:5000";
+      // const data = JSON.stringify({ message: "User closed the browser" });
+
+      // navigator.sendBeacon(url, data);
+      navigator.sendBeacon(url);
     });
   });
 
@@ -75,13 +87,13 @@ function Editor() {
   };
 
   // handle upload image in the server and insert
-  const handleImageUpload = async (event) => {
-    focusEditor();
+  const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-    const imageURL = URL.createObjectURL(file);
-    insertImageInMarkup(imageURL);
+    if (file) {
+      setImages((prev) => [...prev, file]);
+      const imageURL = URL.createObjectURL(file);
+      insertImageInMarkup(imageURL);
+    }
   };
 
   // handle clicked image to remove
@@ -115,9 +127,16 @@ function Editor() {
       }
     }
   };
+  const handleSubmit = async () => {
+    const data = await uploadPhotosAndUpdateContent({ content, images });
+    console.log(data);
+
+    // setContent(data);
+  };
 
   return (
-    <EditorMarkup
+    <EditorUI
+      content={content}
       editorRef={editorRef}
       handleToolbarClick={handleToolbarClick}
       handleSetInputInState={handleSetInputInState}
@@ -126,6 +145,9 @@ function Editor() {
       handleRemoveImage={handleRemoveImage}
       selectedImage={selectedImage}
       handleKeyDown={handleKeyDown}
+      handleSubmit={handleSubmit}
+      isUploading={isUploading}
+      uploadError={uploadError}
     />
   );
 }

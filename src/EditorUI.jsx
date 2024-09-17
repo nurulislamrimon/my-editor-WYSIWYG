@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import "./editor.css";
 
-function EditorMarkup({
+function EditorUI({
   editorRef,
   handleToolbarClick,
   handleSetInputInState,
@@ -10,6 +10,9 @@ function EditorMarkup({
   handleRemoveImage,
   selectedImage,
   handleKeyDown,
+  handleSubmit,
+  isUploading,
+  uploadError,
 }) {
   return (
     <div className="es--editor-container">
@@ -124,7 +127,19 @@ function EditorMarkup({
           </button>
         </div>
       </div>
-
+      {isUploading && (
+        <p
+          style={{
+            position: "absolute",
+            inset: "0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Uploading...
+        </p>
+      )}
       {/* The contentEditable div where users type */}
       <div
         ref={editorRef}
@@ -133,9 +148,16 @@ function EditorMarkup({
         onKeyDown={handleKeyDown}
         contentEditable
         className="editor-content"
+        style={
+          uploadError && {
+            border: "1px solid red",
+          }
+        }
       />
+
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 }
 
-export default EditorMarkup;
+export default EditorUI;

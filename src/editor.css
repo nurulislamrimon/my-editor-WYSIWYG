@@ -1,5 +1,6 @@
 .es--editor-container {
   width: 100%;
+  position: relative;
 }
 
 /* toolbar */
