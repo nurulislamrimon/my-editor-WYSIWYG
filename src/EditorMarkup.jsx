@@ -58,6 +58,7 @@ function EditorMarkup({
             className="align align-right"
           ></button>
         </div>
+
         {/* tags */}
         <div>
           <button
@@ -78,6 +79,7 @@ function EditorMarkup({
             P
           </button>
         </div>
+
         {/* image upload and remove*/}
         <div>
           <button>
@@ -96,6 +98,7 @@ function EditorMarkup({
             />
           </button>
           <button
+            title="Select an Image to remove!"
             onClick={handleRemoveImage}
             disabled={!selectedImage}
             aria-label="Remove Image"

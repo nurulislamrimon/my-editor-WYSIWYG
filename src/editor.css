@@ -9,13 +9,13 @@
   align-items: center;
   background-color: #ccc;
   height: 50px;
-  padding: 0 10px;
+  padding: 0 min(10px, 1vw);
   margin-bottom: 5px;
 }
 .es--editor-container .toolbar div {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: min(8px, 0.5vw);
 }
 
 /* toolbar button */
