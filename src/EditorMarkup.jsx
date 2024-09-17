@@ -16,10 +16,16 @@ function EditorMarkup({
       <div className="toolbar">
         {/* bold italic and underline */}
         <div>
-          <button onClick={handleToolbarClick} value="bold" aria-label="Bold">
+          <button
+            title="Bold"
+            onClick={handleToolbarClick}
+            value="bold"
+            aria-label="Bold"
+          >
             B
           </button>
           <button
+            title="Italic"
             onClick={handleToolbarClick}
             value="italic"
             aria-label="Italic"
@@ -27,6 +33,7 @@ function EditorMarkup({
             I
           </button>
           <button
+            title="Underline"
             onClick={handleToolbarClick}
             value="underline"
             aria-label="Underline"
@@ -38,12 +45,14 @@ function EditorMarkup({
         {/* alignment */}
         <div>
           <button
+            title="Align Left"
             onClick={handleToolbarClick}
             value="justifyLeft"
             aria-label="Align Left"
             className="align align-left"
           ></button>
           <button
+            title="Align Center"
             onClick={handleToolbarClick}
             value="justifyCenter"
             aria-label="Align Center"
@@ -52,6 +61,7 @@ function EditorMarkup({
             {" "}
           </button>
           <button
+            title="Align Right"
             onClick={handleToolbarClick}
             value="justifyRight"
             aria-label="Align Right"
@@ -62,6 +72,7 @@ function EditorMarkup({
         {/* tags */}
         <div>
           <button
+            title="Add a Title"
             onClick={handleToolbarClick}
             value="h1"
             aria-label="Heading 1"
@@ -69,20 +80,26 @@ function EditorMarkup({
             H1
           </button>
           <button
+            title="Add a Subtitle"
             onClick={handleToolbarClick}
             value="h2"
             aria-label="Heading 2"
           >
             H2
           </button>
-          <button onClick={handleToolbarClick} value="p" aria-label="Paragraph">
+          <button
+            title="Add a Paragraph"
+            onClick={handleToolbarClick}
+            value="p"
+            aria-label="Paragraph"
+          >
             P
           </button>
         </div>
 
         {/* image upload and remove*/}
         <div>
-          <button>
+          <button title="Upload an Image">
             <label
               htmlFor="photo"
               style={{ fontSize: "26px", marginTop: "-3px", cursor: "pointer" }}

@@ -9,7 +9,7 @@
   align-items: center;
   background-color: #ccc;
   height: 50px;
-  padding: 0 min(10px, 1vw);
+  padding: 0 min(8px, 0.5vw);
   margin-bottom: 5px;
 }
 .es--editor-container .toolbar div {

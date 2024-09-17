@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import EditorMarkup from "./EditorMarkup";
 
 function Editor() {
@@ -7,6 +7,14 @@ function Editor() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   console.log(content);
+
+  // prevent user from leaving page without saving
+  useEffect(() => {
+    window.addEventListener("beforeunload", function (event) {
+      event.preventDefault();
+      event.returnValue = "Are you sure you want to leave?";
+    });
+  });
 
   // set input
   const handleSetInputInState = () => {
